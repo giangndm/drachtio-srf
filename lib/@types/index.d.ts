@@ -133,11 +133,12 @@ declare module 'drachtio-srf' {
         use(callback: (req: SrfRequest, res: SrfResponse, next: Function) => void): void;
         use(messageType: string, callback: (req: SrfRequest, res: SrfResponse, next: Function) => void): void;
         invite(callback: (req: SrfRequest, res: SrfResponse) => void): void;
+        register(callback: (req: SrfRequest, res: SrfResponse) => void): void;
         request(uri: string, opts, method, [body], callback?: (err, requestSent: SrfRequest) => void);
         proxyRequest(req: SrfRequest, destination: string | string[], [opts], callback?: (err, results) => {}): void;
         createUAS(req: SrfRequest, res: SrfResponse, opts: CreateUASOptions, callback?: (err, dialog: Dialog) => void): Promise<Dialog>;
         createUAC(uri: string | CreateUACOptions, opts?: CreateUACOptions, progressCallbacks?: { cbRequest?: (req: SrfRequest) => void; cbProvisional?: (provisionalRes: SrfResponse) => void; }, callback?: (err, dialog: Dialog) => void): Promise<Dialog>;
-        createB2BUA(req: SrfRequest, res: SrfResponse, uri: string, opts: CreateB2BUAOptions, progressCallbacks?: { cbRequest?: (req: SrfRequest) => void; cbProvisional?: (provisionalRes: Response) => void; cbFinalizedUac?: (uac: Dialog) => void; }, callback?: (err, dialog: Dialog) => {}): Promise<{ uas: Dialog; uac: Dialog }>;
+        createB2BUA(req: SrfRequest, res: SrfResponse, uri: string, opts: CreateB2BUAOptions, progressCallbacks?: { cbRequest?: (err, req: SrfRequest) => void; cbProvisional?: (provisionalRes: Response) => void; cbFinalizedUac?: (uac: Dialog) => void; }, callback?: (err, dialog: Dialog) => {}): Promise<{ uas: Dialog; uac: Dialog }>;
         on(event: 'connect', listener: (err: Error, hostPort: string) => void): this;
         on(event: 'error', listener: (err: Error) => void): this;
         on(event: 'disconnect', listener: () => void): this;
